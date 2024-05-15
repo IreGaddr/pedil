@@ -27,15 +27,17 @@ from pedil import PEDIL
 # Create an instance of the PEDIL class
 pedil = PEDIL()
 
-# Generate unique IDs
+# Generate unique IDs securely
 id1 = pedil.get_or_create_prime_id("1")
 id2 = pedil.get_or_create_prime_id("1,1")
-id3 = pedil.get_or_create_prime_id("2,3,5")
+id3 = pedil.get_or_create_prime_id("2,3")
+id4 = pedil.get_or_create_prime_id("3,4")
 
-# Print the generated IDs
-print(f"ID for '1': {id1}")
-print(f"ID for '1,1': {id2}")
-print(f"ID for '2,3,5': {id3}")
+# Return the secure IDs
+print(f"{id1}")
+print(f"{id2}")
+print(f"{id3}")
+print(f"{id4}")
 ```
 
 ![example](1.png)
@@ -77,7 +79,15 @@ Practical Use
 For most real-world applications, using 1 or 2 levels of PEDIL notation should be sufficient to provide a vast number of unique IDs efficiently without excessive computational overhead.
 Big Data and Machine Learning
 
-For applications like big data and machine learning, where handling trillions of tokens and long processing times are common, PEDIL can scale to higher levels and larger base arrays, offering unique IDs in the trillions.
+For applications like big data and machine learning, where handling trillions of tokens and long processing times are common, PEDIL can scale to higher levels and larger base arrays, offering unique IDs in far beyond the trillions.
+
+Security Considerations
+
+Salting and Hashing
+
+    Each ID is salted and hashed using HMAC with SHA-256 to ensure uniqueness and prevent prediction or spoofing.
+    The salt is randomly generated during initialization, making each ID unique even with the same input.
+
 License
 
 This project is licensed under the MIT License.
